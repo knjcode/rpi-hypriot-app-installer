@@ -1,0 +1,22 @@
+#!/bin/sh
+if mountpoint -q /target-bin; then
+  echo "Installing direnv to /target-bin"
+  cp -p /app/direnv /target-bin
+  echo "Installing fugu to /target-bin"
+  cp -p /app/fugu /target-bin
+  echo "Installing make to /target-bin"
+  cp -p /usr/bin/make /target-bin
+else
+  echo "/target-bin is not a mountpoint."
+  echo "You can either:"
+  echo "- re-run this container with -v /path/to/bin-directory:/target-bin"
+fi
+if mountpoint -q /target-home; then
+  echo "Append direnv hook into .bashrc"
+  grep -q "eval \"\$(direnv hook bash)\"" /target-home/.bashrc || \
+  echo "eval \"\$(direnv hook bash)\"" >> /target-home/.bashrc
+else
+  echo "/target-home is not a mountoint."
+  echo "You can either:"
+  echo "- re-run this container with -v \$HOME:/target-home"
+fi
