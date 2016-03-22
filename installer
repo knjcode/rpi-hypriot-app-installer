@@ -4,6 +4,10 @@ if mountpoint -q /target-bin; then
   cp -p /app/direnv /target-bin
   echo "Installing fugu to /target-bin"
   cp -p /app/fugu /target-bin
+  echo "Installing ghq to /target-bin"
+  cp -p /app/ghq /target-bin
+  echo "Installing peco to /target-bin"
+  cp -p /app/peco /target-bin
   echo "Installing make to /target-bin"
   cp -p /usr/bin/make /target-bin
 else
